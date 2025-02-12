@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Palíndromos</title>
+</head>
+<body>
+    <h2>Verificador de Palíndromos</h2>
+    <input type="text" id="frase" placeholder="Ingresa una frase">
+    <button onclick="verificarPalindromo()">Verificar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function limpiarTexto(texto) {
+            return texto
+                .toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Elimina tildes
+                .replace(/[^a-z0-9]/g, ""); // Elimina caracteres especiales y espacios
+        }
+
+        function esPalindromo(frase) {
+            let textoLimpio = limpiarTexto(frase);
+            let textoReverso = textoLimpio.split("").reverse().join("");
+            return textoLimpio === textoReverso;
+        }
+
+        function verificarPalindromo() {
+            let frase = document.getElementById("frase").value;
+            let resultado = document.getElementById("resultado");
+
+            if (frase.trim() === "") {
+                resultado.textContent = "Por favor, ingresa una frase.";
+                return;
+            }
+
+            if (esPalindromo(frase)) {
+                resultado.textContent = "✅ La frase es un palíndromo.";
+            } else {
+                resultado.textContent = "❌ La frase NO es un palíndromo.";
+            }
+        }
+    </script>
+</
